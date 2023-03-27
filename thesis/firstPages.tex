@@ -1,0 +1,92 @@
+
+
+\pagenumbering{alph}
+
+% Konfiguration für Kopfzeile
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand*\MakeUppercase[1]{#1}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{}
+\pagestyle{fancy}
+
+% Konfiguration Inhaltsverzeichnis
+\makeatletter
+\renewcommand*\tableofcontents{\@starttoc{toc}}
+\makeatother
+
+\pagenumbering{roman}
+%Eidesstattliche Versicherung
+\newpage
+%\section*{Eidesstattliche Erklärung}
+\section*{Statutory declaration}
+%\fancyhead[L]{Eidesstattliche Erklärung}
+\fancyhead[L]{Statutory declaration}
+%\addcontentsline{toc}{section}{Eidesstattliche Erklärung} 
+\addcontentsline{toc}{section}{Statutory declaration} 
+%Ich erkläre an Eides statt, dass ich die vorliegende Masterarbeit selbstständig und ohne fremde Hilfe verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt bzw. die wörtlich oder sinngemäß entnommenen Stellen als solche kenntlich gemacht habe.
+I hereby declare that the thesis submitted is my own unaided work, that I have not used other than the sources indicated, and that all direct and indirect sources are acknowledged as references.
+%Die vorliegende Masterarbeit ist mit dem elektronisch übermittelten Textdokument identisch.
+This printed thesis is identical with the electronic version submitted.
+
+\vspace{2.5cm}
+\parbox{4cm}{\hrule
+%\strut \footnotesize Ort, Datum} \hfill\parbox{4cm}{\hrule
+\strut \footnotesize Place, Date} \hfill\parbox{4cm}{\hrule
+%\strut \footnotesize Unterschrift}
+\strut \footnotesize Signature}
+
+\section*{Zusammenfassung}
+\fancyhead[L]{Zusammenfassung}
+%\addcontentsline{toc}{section}{Zusammenfassung} 
+
+\section*{Abstract}
+\fancyhead[L]{Abstract}
+%\addcontentsline{toc}{section}{Abstract}
+The Python programming language has emerged as the first choice for scientific computing and data processing due to its ease of use and vast ecosystem of libraries and modules.
+Python, however, is inherently unsuited for compute-intensive tasks such as signal processing because of its overhead as an interpreted language and its inability to effictevily utilize all cores of modern CPUs due to the Global Interpreter Lock (GIL).
+To address this performance limitation, various tools and libraries have been developed within the Python ecosystem to optimize performance.
+Tools commonly used in the domain such as Numpy and Scipy provide Python Interfaces to highly optimized and often parallelized C and Fortran libraries.
+
+One particularly promising area for further improvements is the integration of Graphics Processing Units (GPUs) for computation tasks, which lend themselves to parallel execution.
+In recent years GPUs have been extensively used in conjunction with Python in the field of Deep Learning.
+This led to a number of Python packages, which offer accessible ways to leverage the GPU's computing capabilities.
+In this thesis, we investigate the use of GPUs to accelerate signal processing in Python, with a focus on the FFT algorithm.
+We explore suitable libraries available to Python users, such as PyTorch (a framework commonly used in deep-learning that offers offloading tasks to GPUs) or CuPy (a GPU aware replacement for Numpy).
+We also implement our own GPU-accelerated FFT using idiomatic CUDA-C and integrate that routine into a Python program.
+
+Our experimental results demonstrate that GPU-accelerated libraries can provide substantial speedups in FFT calculations compared to CPU based implementations.
+This is especially true for batched transforms or transforms of higher dimensions.
+While our work is limited to a specific set of hardware and software configurations and small subset of algorithms, our findings can serve as a starting point for further exploration of GPU-accelerated signal processing in Python.
+%Inhaltsverzeichnis
+\newpage
+%\fancyhead[L]{Inhaltsverzeichnis}
+\fancyhead[L]{Table of contents}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\tableofcontents
+%\addcontentsline{toc}{section}{Inhaltsverzeichnis}
+% Verzeichnisse
+\renewcommand{\arraystretch}{2} % doppelter Zeilenabstand für Tabellen in den Verzeichnissen
+
+% Abkürzungen
+\newpage
+%\section*{Abkürzungen}
+\section*{List of abbreviations}
+%\fancyhead[L]{Abkürzungen}
+\fancyhead[L]{List of abbreviations}
+%\addcontentsline{toc}{section}{Abkürzungen} 
+\addcontentsline{toc}{section}{List of abbreviations} 
+\input{abbreviations.tex}
+
+\renewcommand{\arraystretch}{1.1} % Zurück zu 1,1-fachem Zeilenabstand in Tabellen im normalen Inhalt
+
+%Inhalt
+\newpage
+\fancyhead[L]{\leftmark}
+\pagenumbering{arabic}
+\setcounter{page}{1} 
+
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
