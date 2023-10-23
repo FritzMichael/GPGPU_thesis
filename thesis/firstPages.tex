@@ -39,19 +39,35 @@ This printed thesis is identical with the electronic version submitted.
 
 \section*{Zusammenfassung}
 \fancyhead[L]{Zusammenfassung}
-%\addcontentsline{toc}{section}{Zusammenfassung} 
+\addcontentsline{toc}{section}{Zusammenfassung}
+
+Die Programmiersprache Python hat sich in den letzten Jahren als beliebte Sprache für wissenschaftliche Berechnungen und Datenverarbeitung etabliert.
+Python ist jedoch aufgrund seiner Eigenschaften als dynamisch typisierte und interpretierte Sprache grundsätzlich schlecht für rechenintensive Aufgaben wie die Signalverarbeitung geeignet. In Python ist es beispielsweise nicht möglich, alle Kerne moderner CPUs effektiv zu nutzen, da die Sprache einen \acrfull{gil} verwendet.
+
+Um diese Leistungseinschränkungen zu umgehen werden im Umfeld von Python verschiedene Werkzeuge und Bibliotheken entwickelt, die es einfach ermöglichen nativen, kompilierten Code in Python zu verwenden.
+Bekannte Beispiele sind Numpy und Scipy, die Python-Interfaces zu hoch optimierten und oft parallelisierten C und Fortran Bibliotheken bieten.
+
+Ein besonders vielversprechender Ansatz zur weiteren Verbesserung der Leistung ist der Einsatz von Grafikprozessoren (GPUs) für berechnungsintensive Aufgaben, die sich für eine parallele Ausführung eignen.
+In den letzten Jahren wurden GPUs in Verbindung mit Python intensiv im Bereich des Deep Learning eingesetzt, wodurch eine Vielzahl von Python-Paketen entstanden ist, die einen einfachen Zugriff auf die GPU ermöglichen.
+In dieser Arbeit untersuchen wir den Einsatz von GPUs zur Beschleunigung der Signalverarbeitung in Python, wobei der Schwerpunkt auf der \acrfull{fft} liegt.
+Wir untersuchen geeignete Bibliotheken, die Python-Benutzern zur Verfügung stehen, wie PyTorch (ein Framework, das häufig in Bereich Deep-Learning verwendet wird und eine Vielzahl an Operationen auf GPUs auslagern kann) oder CuPy (eine Bibliothek ähnlich zu Numpy, die Berechnungen auf der GPU ausführt).
+Weiters wird eine eigene GPU-beschleunigte FFT-Routine in CUDA-C implementiert und in ein Python-Programm integriert.
+
+Die experimentellen Ergebnisse zeigen, dass GPU-beschleunigte Bibliotheken erhebliche Geschwindigkeits-vorteile bei der Berechnung der FFT gegenüber CPU-basierten Implementierungen bieten können.
+Dies gilt insbesondere für die Berechnung von mehrdimensionalen Transformationen oder einer großen Anzahl an  Transformationen gleichzeitig.
+Die Ergebnisse dieser Arbeit sind zwar auf eine bestimmte Hardware- und Softwarekonfiguration beschränkt und umfassen nur einen kleinen Teil der relevanten Algorithmen, können aber als Ausgangspunkt für weitere Untersuchungen zur GPU-beschleunigten Signalverarbeitung im Kontext von Python dienen.
 
 \section*{Abstract}
 \fancyhead[L]{Abstract}
-%\addcontentsline{toc}{section}{Abstract}
+\addcontentsline{toc}{section}{Abstract}
 The Python programming language has emerged as the first choice for scientific computing and data processing due to its ease of use and vast ecosystem of libraries and modules.
-Python, however, is inherently unsuited for compute-intensive tasks such as signal processing because of its overhead as an interpreted language and its inability to effectively
-utilize all cores of modern \acrfullpl{cpu} due to the \acrfull{gil}.
+Python, however, is inherently unsuited for compute-intensive tasks such as signal processing because of its overhead as an interpreted language.
+Furthermore it is unable to effectively utilize all cores of modern \acrfullpl{cpu} due to the \acrfull{gil}.
 To address this performance limitation, various tools and libraries have been developed within the Python ecosystem to optimize performance.
-Tools commonly used in the domain such as Numpy and Scipy provide Python Interfaces to highly optimized and often parallelized C and Fortran libraries.
+Tools commonly used in the domain such as Numpy and Scipy provide Python interfaces to highly optimized and often parallelized C and Fortran libraries.
 
 One particularly promising area for further improvements is the integration of Graphics Processing Units (GPUs) for computation tasks, which lend themselves to parallel execution.
-In recent years \acrfullpl{gpu} have been extensively used in conjunction with Python in the field of Deep Learning.
+In recent years GPUs have been extensively used in conjunction with Python in the field of Deep Learning.
 This led to a number of Python packages, which offer accessible ways to leverage the GPU's computing capabilities.
 In this thesis, we investigate the use of GPUs to accelerate signal processing in Python, with a focus on the FFT algorithm.
 We explore suitable libraries available to Python users, such as PyTorch (a framework commonly used in deep-learning that offers offloading tasks to GPUs) or CuPy (a GPU aware replacement for Numpy).
@@ -78,15 +94,17 @@ While our work is limited to a specific set of hardware and software configurati
 %\fancyhead[L]{Abkürzungen}
 \fancyhead[L]{List of Acronyms}
 %\addcontentsline{toc}{section}{Abkürzungen} 
-\addcontentsline{toc}{section}{List of acronyms} 
+
 %\input{abbreviations.tex}
-\printglossary[type=\acronymtype,style=mcolindex, title={List of Acronyms}]
+\printglossary[type=\acronymtype, style=mcolindex, title={List of Acronyms}]
+\addcontentsline{toc}{section}{List of Acronyms} 
+
 
 \renewcommand{\arraystretch}{1.1} % Zurück zu 1,1-fachem Zeilenabstand in Tabellen im normalen Inhalt
 
 %Inhalt
 \newpage
-\fancyhead[L]{\leftmark}
+\fancyhead[L]{\rightmark}
 \pagenumbering{arabic}
 \setcounter{page}{1} 
 
